@@ -8,10 +8,10 @@ rule pdf1 {
 
 	strings: 
 		$magic = { 25 50 44 46 } //%PDF
-		$url = "http://www.itdd.club/" ascii nocase
+		$url = "http://" ascii nocase
 
 	condition:
-		$magic and 
+		$magic and
 		$url 		
 }	
 rule pdf2: obs_url 
