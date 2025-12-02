@@ -20,7 +20,7 @@ rule pwsh_in_LNK
 {
 	meta: 
 		author = "k3rnelcallz"
-		description = "Rule identifying (LNK) shortcut files."
+		description = "Powershell and network activity in shortcut files."
 		sha256 = "4f2617a971b9c78c8b215d6cb65525ff56f0633a3bcd381695a19efe08156a04"		
 		creation_date = "2-12-25"
 		last_modified = "2-12-25"
@@ -42,7 +42,7 @@ rule files_in_LNK
 {
 	meta: 
 		author = "k3rnelcallz"
-		description = "Rule identifying (LNK) shortcut files."
+		description = "Filetypes present in shortcut files."
 		sha256 = "4f2617a971b9c78c8b215d6cb65525ff56f0633a3bcd381695a19efe08156a04"		
 		creation_date = "2-12-25"
 		last_modified = "2-12-25"
@@ -62,7 +62,7 @@ rule persistence_in_LNK
 {
 	meta: 
 		author = "k3rnelcallz"
-		description = "Rule identifying (LNK) shortcut files."
+		description = "Persistence and task scheduling mechanism in shortcut files."
 		sha256 = "4f2617a971b9c78c8b215d6cb65525ff56f0633a3bcd381695a19efe08156a04"		
 		creation_date = "2-12-25"
 		last_modified = "2-12-25"
