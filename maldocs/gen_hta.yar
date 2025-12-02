@@ -1,16 +1,19 @@
-rule hta_dropper {
-	
+rule hta_dropper 
+{
 	meta: 
 		description = "hta file with wscript"
 		author = "k3rnelcallz"
 		reference = "malwarebazaar"
 		sha256 = "59707a70be5a6f88ec5e4a404479ba69457d8b34358e58e9399d2f327a2e5005"
+		creation_date = "30-11-25"
+		last_modified = "30-11-25"
+		source = "Malwarebazaar"
+		category = "Info"
 
 	strings: 
 		/* hta indicators */ 
 		$hta1 = {3C 68 74 6D 6C 3E}  // magic_bytes
 		$hta2 = "<HTA:APPLICATION" nocase 
-
 
 		/* vbscripts for automation */
 		$vbs1 = "CreateObject(\"WScript.Shell\")" nocase
@@ -42,6 +45,10 @@ rule hta_dropper {
         description = "Detects JavaScript hiding browser windows via resizeTo/moveTo"
         sha256 = "2e5934e38666e63c23f5906e5175a1bf5c230972cb57bb8c07dab0630921fa43"
         ref = "malwarebazaar"
+		creation_date = "30-11-25"
+		last_modified = "30-11-25"
+		source = "Malwarebazaar"
+		category = "Info"
 
     strings:
     // ActiveX/WMI usage

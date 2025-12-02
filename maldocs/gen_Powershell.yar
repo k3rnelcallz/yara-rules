@@ -2,12 +2,14 @@ rule powershell_dropper {
 
 	meta: 
 		author = "k3rnelcallz"
-		desc = "powershell dropper with hidden bypass execution and persistence"
+		description = "powershell dropper with hidden bypass execution and persistence"
 		sha256 = "f9e832c9cd54668c35bab5077df30af51ced5f9473d570e73b369437a632523a"
-
+        creation_date = "11-2-25"
+		last_modified = "12-2-25"
+		source = "Malwarebazaar"
+		category = "Info"
 
 	strings:
-
 		/* downloading indicators */
 		$e1 = "-ExecutionPolicy bypass" nocase
 		$e2 = "-windowstyle hidden" nocase
@@ -34,9 +36,13 @@ rule Suspicious_PowerShell_AssemblyLoader
         description = "Detects PowerShell scripts loading assemblies from memory and hiding payloads"
         author = "k3rnelcallz"
         sha256 = "56e0cfc0fb789f7d8d7cef0b8497eef95563f46bb383d5f38061347657eaa445"
-		ref = "malwarebazaar"
-
-strings:
+		source = "malwarebazaar"
+        creation_date = "11-2-25"
+		last_modified = "12-2-25"
+		source = "Malwarebazaar"
+		category = "Info"
+        
+    strings:
         // Reflection-based assembly loading
         $load = "[System.Reflection.Assembly]::Load"
         $invoke = ".Invoke("
@@ -60,6 +66,3 @@ strings:
         // And at least one of the suspicious markers
         and any of ($blackhawk,$shoot,$aspnet_compiler)
 }
-
-
-
