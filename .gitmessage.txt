@@ -1,0 +1,21 @@
+type(area): short summary
+
+
+
+Details:
+
+- What was reversed / added
+
+- Detection logic change
+
+- Sample or hash
+
+- Tool used (x64dbg, DNSpy, Ghidra, etc)
+
+
+
+Refs:
+
+- VT / sandbox links
+
+ 
