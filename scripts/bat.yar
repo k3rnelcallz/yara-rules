@@ -1,7 +1,7 @@
 rule BAT_File_Generic
 {
     meta:
-        author = "kz"
+        author = "k3rnelcallz"
         description = "Generic Windows batch file identification"
         sha = "7a3962542b2a4b3f2b4d157c2efbcfaba87f347419de7b2671b84be71c93234e"
         tags = "generic"
@@ -17,10 +17,10 @@ rule BAT_File_Generic
         uint16(0) == 0x4040 and
         1 of ($bat_magic*)
 }
-rule bat_relaunch_
+rule Bat_Relaunch_Hidden
 {
     meta:
-        author = "kz"
+        author = "k3rnelcallz"
         description = "malicious bat runs in hidden mode"
         sha = "7a3962542b2a4b3f2b4d157c2efbcfaba87f347419de7b2671b84be71c93234e"
         tags = "Koadic"
@@ -33,7 +33,7 @@ rule bat_relaunch_
         $ = "\\Contacts\\!RANDZIP!.zip"
         $ = "\\Contacts\\!RANDZIP!.zip"
         $ = "\\Contacts\\!RANDSTZIP!.zip"
-        $ = "\Contacts\\doku"
+        $ = "\\Contacts\\doku"
         $ = "\\Contacts\\!RANDSTARTUP!.bat"
         $ = "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
         $ = "FromBase64String"
