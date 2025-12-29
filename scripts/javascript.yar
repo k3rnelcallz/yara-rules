@@ -46,7 +46,7 @@ rule Targeted_JS_Dropper_Variant {
     meta:
         description = "Detects specific JS dropper variant using ActiveX and identified obfuscation strings"
         author = "k3rnelcallz"
-        reference = 'malwarebazaar'
+        reference = "malwarebazaar"
         date = "29-12-25"
 
     strings:
