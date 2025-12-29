@@ -41,3 +41,65 @@ rule js_sig_block_usage
 		any of ($sig_block_marker*)
 		and $f
 }
+
+rule Targeted_JS_Dropper_Variant {
+    meta:
+        description = "Detects specific JS dropper variant using ActiveX and identified obfuscation strings"
+        author = "k3rnelcallz"
+        reference = 'malwarebazaar'
+        date = "29-12-25"
+
+    strings:
+        //most unique function name identified
+        $fn_del = "ThreeCharsDEL" ascii wide
+
+        //repetitive function pattern
+        $fn_ww = "function WWWWWWWWW(" ascii wide
+
+        //specific obfuscation technique: split/join to hide strings
+        $obfs_split = ".split('>').join('')" ascii wide
+
+        //ActiveX and File System interaction
+        $ax_1 = "ActiveXObject" ascii wide
+        $ax_2 = ".FileExists" ascii wide
+
+        //Variable name patterns (using regex to handle minor variations)
+        // Matches "var urlname" followed by many 'o's
+        $var_url = /var\s+urlnameo{5,}/ ascii wide
+
+        //Matches the "this.MJUBCB..." pattern 
+        $var_obfs = /this\.[A-Z]{5,}\s*\+=\s*['"]/ ascii wide
+        
+     	//hex-to-decimal/hex conversion function
+        $fn_d2h = "this.d2h" ascii wide
+
+    condition:
+
+        $fn_del or (3 of ($fn_ww, $obfs_split, $ax_1, $ax_2, $var_url, $var_obfs, $fn_d2h))
+}
+
+rule Obfs_behavior_wmi {
+    meta:
+        description = "detection for JS Loader focusing on WMI/ADSI discovery and XOR loops"
+        author = "k3rnelcallz"
+        reference = "malwarebazaar"
+        sha = "2e5934e38666e63c23f5906e5175a1bf5c230972cb57bb8c07dab0630921fa43"
+
+    strings:
+        /* Unique XOR de-obfuscation pattern: "number * number + number & 255" */
+        $xor_math = { 2A [1-10] 2B [1-10] 26 20 32 35 35 } 
+
+        /* Critical ActiveX Objects - often used in combination by this threat */
+        $obj1 = "Schedule.Service"
+        $obj2 = "Win32_Process"
+        $obj3 = "ADODB.Stream"
+        $obj4 = "OpenDSObject"  // ADSI - Very specific to domain recon
+        
+        /* Specific behavioral artifacts */
+        $sid_admin = "-512"      // Domain Admin SID check
+        $stealth = "ShowWindow = 0"
+        $rand_seed = "Math.random() * 900000"
+
+    condition:
+        (filesize < 300KB) and ($xor_math and 2 of ($obj*, $sid_admin, $stealth, $rand_seed))
+}
