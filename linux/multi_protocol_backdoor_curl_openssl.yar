@@ -4,7 +4,6 @@ rule multi_protocol_backdoor_curl_openssl {
     meta:
         sha =  "bcf35e2480f41447067f92db298ec77848bbb056cbe28a47acfba6d046132650"
         filename = "MALWARE.efi"
-        filesize = "6.34 MB"
         tags = "elf, trojan, mirai, backdoor"
 
     strings:
