@@ -4,10 +4,10 @@ import "elf"
 rule mirai_aarch64_arm { 
 
 	meta: 
-		Sha256 = “9ff218d40f0810b1f8dfaa9f667432fb278fb8d53cc33e89bd20eca0406691b6”
-		filename =“aarch64”
-		filesize =  “117.84 KB”
-		tags = “linux, mirai, password bruteforcing, telnet, aarch64” 
+		Sha256 = "9ff218d40f0810b1f8dfaa9f667432fb278fb8d53cc33e89bd20eca0406691b6"
+		filename = "aarch64"
+		filesize =  "117.84 KB"
+		tags = "linux, mirai, password bruteforcing, telnet, aarch64"
 
 
 	strings: 
