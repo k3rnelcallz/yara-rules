@@ -1,7 +1,9 @@
 rule ELF_PPC_DDoSBot_HTTP_Flooder {
     meta:
         description = "ELF32 PPC DDoS Bot with HTTP flood capability"
-        author = "Analysis"
+        author = "k3rnelcallz"
+        sha256 = "d794ff8d3dcf66118ce0cc12ea946e071a1af8e6a6f889b1295415268f4ddba2"
+        ref = "https://urlhaus.abuse.ch/url/3850305/"
         
     strings:
         $c2_token   = "token=%s&guid=%s"
