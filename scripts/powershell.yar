@@ -134,3 +134,39 @@ meta:
     condition:
         $cmd_stop_service and any of ($av_service_*)
 }
+rule fileless_pwsh_payload{
+    meta: 
+        description     = "fileless PowerShell shellcode loader: CryptStringToBinary decode into CreateFileMapping RWX region with delegate execution"
+        author          = "k3rnellcallz"
+        sha256          = "33a7648c64588e855b411fe9bcdb51489d4a33e4ab86705661049bb9b65ceddb"
+        confidence      = "high"
+        mitre_attack    = "T1059.001, T1027, T1620, T1055, T1036"
+        reference       = "Cobalt Strike PowerShell stageless payload pattern- malwarebazaar"
+
+    strings: 
+        // API Resolution
+        $sc_unsafe          = "UnsafeNativeMethods" ascii wide nocase
+        $sc_get_proc        = "GetProcAddress" ascii wide nocase
+        
+        // Crypt32 decode chain
+        $sc_crypt32         = "crypt32.dll" ascii wide nocase
+        $sc_crypt_func      = "CryptStringToBinaryA" ascii wide nocase
+        $sc_load_lib        = "LoadLibraryA" ascii wide nocase
+        
+        // File mapping RWX allocation
+        $sc_create_map      = "CreateFileMappingA" ascii wide nocase
+        $sc_map_view        = "MapViewOfFile" ascii wide nocase
+        $sc_rwx             = "0x08000040" ascii nocase
+        $sc_map_access      = "0x000F003F" ascii nocase
+
+    condition: 
+        filesize < 10MB and 
+
+        $sc_unsafe and $sc_get_proc and
+
+        $sc_crypt32 and $sc_crypt_func and $sc_load_lib and 
+
+        $sc_create_map and $sc_map_view and $sc_rwx and $sc_map_access
+
+    }
+    
