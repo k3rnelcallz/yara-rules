@@ -94,3 +94,21 @@ condition:
 	(all of ($a*)) and (3 of ($p*)) or (all of ($v*))
 	
 }
+rule malicious_hta{
+	meta: 
+		description = "Obfuscated hta Using Powershell Reflective Assembly"
+		source = "malwarebazaar"
+		author = "k3rnelcallz"
+		sha256 = "47af1f0d9932840767920b3cb2befb3839bbc980e610c6a14327edf1b1682b2d"
+
+	strings: 
+//powershell usage and wscript and encoding
+		$c_base64 = "FromBase64String"	nocase wide ascii 
+		$c_pwsh = "ActiveXObject" nocase wide ascii
+		$c_shell = "WScript.Shell" nocase wide ascii
+		$c_pwsh2 = "Invoke-Expression" nocase wide ascii
+		$c_winproc = "Win32_Process" nocase wide ascii
+
+	condition: 
+		all of ($c*) 
+}
